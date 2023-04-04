@@ -1,0 +1,95 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+
+:root {
+  --button-background-color: antiquewhite;
+  --font-color: antiquewhite;
+  --brown-color: brown;
+}
+
+button {
+  background-color: var(--button-background-color);
+  color: var(--brown-color);
+  padding: 0.5rem 1rem;
+  border: none;
+  font-size: 1.2rem;
+  border-radius: 12px;
+  font-weight: 800;
+  transition: 0.3s ease all;
+}
+button:hover {
+  color: rgba(250, 235, 215, 0.823) ;
+  background-color: rgba(103, 1, 1, 0.803);
+}
+.container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  color: var(--font-color);
+  background-color: rgba(0, 0, 0, 0.889);
+}
+.form {
+  text-align: center;
+  background-color: rgb(181, 126, 54);
+  border-radius: 20px;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: center;
+  transition: 0.3s ease all;
+  align-items: center;
+  margin: 1rem;
+}
+.todo-input {
+  background-color: inherit;
+  font-size: 1.3rem;
+  color: var(--font-color);
+  border: none;
+  outline: none;
+  padding: 0.8rem;
+}
+.todo-input::placeholder {
+  color: var(--font-color);
+}
+.toster {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  font-size: 1.1rem;
+  background-color: var(--brown-color);
+  text-transform: capitalize;
+  color: var(--font-color);
+  border-radius: 6px;
+  display: none;
+  animation: Effect 0.3s ease 1 forwards;
+}
+
+@keyframes Effect {
+  0% { transform: translateY(100%); }
+  100% { transform: translateY(-10%); }
+}
+
+.todo-list-item {
+  background-color: var(--brown-color);
+  padding: 0.4rem;
+  font-size: 1.3rem;
+  border-radius: 6px;
+  margin: 0 0 0.5rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.2rem;
+}
+.todo-list-value {
+    padding-right: 1rem;
+}
