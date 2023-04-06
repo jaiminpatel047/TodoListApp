@@ -170,7 +170,11 @@ function complated(){
   const todoCheck = this.parentNode;
   todoCheck.classList.toggle('check');
 
+  
+  if(todoCheck.classList.contains('check')){
   let complatedMsg = document.querySelector('.notification-completed');
   complatedMsg.style.display = 'block';
   setTimeout(() => complatedMsg.style.display = 'none' , 3000)
+  }
+  
 }
