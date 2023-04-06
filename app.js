@@ -37,9 +37,11 @@ function todoTask() {
   let todoList = document.createElement("div");
   todoList.classList.add("todo-list-item");
 
+  const uniqueId = Date.now().toString();
+
   let todoValue = document.querySelector(".todo-input").value;
   todoList.innerHTML = `
-            <div class="todo-list-value">
+            <div class="todo-list-value" data-id='${uniqueId}'>
               ${todoValue}
             </div>
               <button class="todo-item-update"><i class="fa-solid fa-pen-to-square"></i></button>
@@ -57,17 +59,22 @@ function todoTask() {
 
   taskStoreArray.push(todoList);
   document.querySelector('.totalTaskNumber').innerText = taskStoreArray.length;
-  console.log(taskStoreArray.length + " : " + taskStoreArray);
+
+  let showNotification = document.querySelector('.notification-added');
+  showNotification.style.display = 'block';
+  setTimeout(() => { showNotification.style.display = 'none'}, 3000);  
 }
 
 
 // delete 
 function deleteTodo(){
   let showTask = document.querySelector('.totalTaskNumber');
+  let showDeleteMsg = document.querySelector('.notification-delete');
+  showDeleteMsg.style.display = 'block'
 
     const todoItem = this.parentNode;
     todoItem.remove();
-  
+     
      taskStoreArray.pop(todoItem)
      // if(taskStoreArray.length === 0){
      //    showTask.innerText = null;
@@ -77,22 +84,46 @@ function deleteTodo(){
 
      // ES6 if condition 
      taskStoreArray.length === 0?showTask.innerText = null:showTask.innerText = taskStoreArray.length;
-     
+
+
+  setTimeout(() => { showDeleteMsg.style.display = 'none'}, 3000);        
 }
 
 // update
 function updateTodo(){
+  // Overlay Open;
    let taskOverlay = document.querySelector('.overlay');
        taskOverlay.style.display = 'block'
 
-   let overlayClose = taskOverlay.
-   overlayClose.onClick = () => { taskOverlay.style.display = 'none' }
+   // Overlay Close;
+  let overlayClose = document.querySelector('.overlayClose');
+  overlayClose.onclick = () => { taskOverlay.style.display = 'none' }
+
+
+  // Get the todo item element
+  const todoItem = this.parentNode;
+  const todoValueElement = todoItem.querySelector(".todo-list-value");
+  const currentTodoValue = todoValueElement.innerText;
+
+  const inputField = document.querySelector(".todo-edite-input");
+  const updateButton = document.querySelector(".todo-edite-button");
+
+  inputField.value = currentTodoValue;
+
+  updateButton.onclick = () => {
+    const newTodoValue = inputField.value;
+    todoValueElement.innerText = newTodoValue;
+
+    // Hide the overlay
+    taskOverlay.style.display = "none";
 }
+} 
 
 // Task Icon Show
 taskIconButton.onclick = () =>{
   let taskIcon = document.querySelector('.taskShowIcon');
   let totalTask = document.querySelector('.taskDisplay');
+  
 
   taskIconButton.classList.toggle('active');
 
@@ -110,5 +141,20 @@ taskIconButton.onclick = () =>{
   : (taskIcon.style.display = 'block', totalTask.style.display = 'none');
 }
 
-// Overlay
 
+
+// aside Bar section 
+let asideIconRight = document.querySelector('.asideBar-right-icon');
+let asideIconLeft = document.querySelector('.asideBar-left-icon')
+let asideBar = document.querySelector('.asideBar-taskMenu');
+
+asideIconRight.addEventListener('click', () => { 
+    asideIconRight.style.display = 'none'
+    asideIconLeft.style.display = 'block'
+    asideBar.classList.add('taskMenuActive') 
+})
+asideIconLeft.addEventListener('click', () => { 
+   asideIconLeft.style.display = 'none'
+   asideIconRight.style.display = 'block'
+  asideBar.classList.remove('taskMenuActive') 
+})
